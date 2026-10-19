@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0908">
+<title>Il tuo nome – Videomaker e art director</title>
+<meta name="description" content="Portfolio di video e fotografia di Il tuo nome, videomaker e art director.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0908;
+    --panel: #151311;
+    --ink: #ece8e0;
+    --muted: #918b82;
+    --line: #28241f;
+    --accent: #e0a24a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-snap-type: y proximity; background: var(--bg); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif; font-stretch: 100%;
+    font-size: 1.0625rem; line-height: 1.65;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+  .display { font-stretch: 118%; font-weight: 800; letter-spacing: -0.025em; line-height: 0.96; }
+  section, .hero { scroll-snap-align: start; scroll-margin-top: 0; }
+
+  /* Menu fisso */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 20;
+    padding: 18px 0; transition: background .3s;
+  }
+  header.solid { background: rgba(10,9,8,.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .logo { text-decoration: none; font-stretch: 125%; font-weight: 800; font-size: 1rem; }
+  nav { display: flex; gap: 28px; }
+  nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; padding: 4px 0; border-bottom: 2px solid transparent; }
+  nav a:hover { color: var(--ink); }
+  nav a.attivo { color: var(--ink); border-bottom-color: var(--accent); }
+  .menu-btn { display: none; background: none; border: 1px solid var(--line); color: var(--ink); font: inherit; padding: 6px 14px; cursor: pointer; }
+
+  /* Home: video a tutto schermo */
+  .hero {
+    position: relative; min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 120px 0 40px; overflow: hidden;
+  }
+  .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(10,9,8,.95) 0%, rgba(10,9,8,.35) 55%, rgba(10,9,8,.55) 100%);
+  }
+  .hero .wrap { position: relative; z-index: 2; width: 100%; }
+  .hero .tag { color: var(--muted); font-weight: 500; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(3.4rem, 14vw, 12rem); margin-bottom: 22px; animation: entra 1s ease-out both; }
+  @keyframes entra { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  .hero .claim { font-size: 1.25rem; max-width: 34rem; margin-bottom: 34px; }
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600;
+    padding: 13px 26px; border: 1px solid var(--ink);
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.pieno { background: var(--ink); color: var(--bg); }
+  .btn.pieno:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .scorri { margin-top: 44px; color: var(--muted); font-size: 0.9rem; }
+
+  /* Sezioni */
+  section { padding: 110px 0; border-top: 1px solid var(--line); }
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 48px; flex-wrap: wrap; }
+  h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); }
+  .head p { color: var(--muted); }
+
+  /* Chi Sono */
+  .about { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+  .about .frase { font-stretch: 118%; font-weight: 800; letter-spacing: -0.02em; line-height: 1.02; font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 32px; }
+  .about p { max-width: 36rem; color: #cfcac1; }
+  .about p + p { margin-top: 18px; }
+  .portrait { background: var(--panel); aspect-ratio: 4 / 5; overflow: hidden; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Foto */
+  .photos { columns: 3 280px; column-gap: 14px; }
+  .photos button {
+    display: block; width: 100%; margin: 0 0 14px; padding: 0; border: 0; cursor: zoom-in;
+    background: var(--panel); min-height: 200px; break-inside: avoid; overflow: hidden;
+  }
+  .photos img { display: block; width: 100%; height: auto; transition: opacity .2s; }
+  .photos button:hover img { opacity: .8; }
+  dialog { background: transparent; border: 0; max-width: 96vw; max-height: 96vh; margin: auto; }
+  dialog::backdrop { background: rgba(0,0,0,.93); }
+  dialog img { display: block; max-width: 96vw; max-height: 88vh; margin: 0 auto; }
+  dialog form { text-align: center; margin-top: 12px; }
+  dialog button { background: none; border: 1px solid var(--line); color: var(--ink); padding: 8px 22px; font: inherit; cursor: pointer; }
+  dialog button:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Video */
+  .frame { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+  .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 52px 28px; }
+  .video:first-child { grid-column: 1 / -1; }
+  .video .etichetta { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-top: 18px; }
+  .video h3 { font-size: 1.2rem; font-weight: 700; margin-top: 6px; }
+  .video:first-child h3 { font-size: 1.8rem; font-stretch: 112%; }
+  .video p { color: var(--muted); font-size: 0.95rem; }
+
+  /* Servizi */
+  .services { list-style: none; }
+  .services li { display: grid; grid-template-columns: minmax(180px, 1fr) 2fr; gap: 8px 32px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .services li:last-child { border-bottom: 1px solid var(--line); }
+  .services strong { font-stretch: 112%; font-weight: 700; font-size: 1.25rem; }
+  .services span { color: var(--muted); }
+
+  /* Contatti */
+  .contact a.mail {
+    font-stretch: 118%; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+    font-size: clamp(1.5rem, 5.5vw, 4rem);
+    text-decoration: none; border-bottom: 3px solid var(--accent); word-break: break-word;
+  }
+  .contact a.mail:hover { color: var(--accent); }
+  .contact .nota { color: var(--muted); max-width: 34rem; margin-bottom: 32px; }
+
+  footer { padding: 36px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap; }
+  footer nav { gap: 20px; flex-wrap: wrap; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 800px) {
+    .menu-btn { display: block; }
+    header nav {
+      position: fixed; inset: 0 0 auto 0; top: 62px; flex-direction: column; gap: 0;
+      background: rgba(10,9,8,.97); padding: 8px 28px 20px; display: none;
+    }
+    header nav.aperto { display: flex; }
+    header nav a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.1rem; }
+    .about, .videos { grid-template-columns: 1fr; }
+    .services li { grid-template-columns: 1fr; }
+    section { padding: 80px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <div class="wrap">
+    <a class="logo" href="#home">Il tuo nome</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav id="menu" aria-label="Menu principale">
+      <a href="#home">Home</a>
+      <a href="#chi-sono">Chi Sono</a>
+      <a href="#foto">Foto</a>
+      <a href="#video">Video</a>
+      <a href="#servizi">Servizi</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HOME: video di sfondo a tutto schermo.
+       Metti un breve loop (10-20 secondi, sotto i 25 MB) in una cartella "video" con il nome hero.mp4 -->
+  <div class="hero" id="home">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="video/hero.mp4" type="video/mp4">
+    </video>
+    <div class="wrap">
+      <p class="tag">Videomaker e art director · @tuoprofilo</p>
+      <h1 class="display">Il tuo<br>nome</h1>
+      <p class="claim">Video e immagini che raccontano un’idea, dalla prima bozza al montaggio finale.</p>
+      <div class="cta">
+        <a class="btn pieno" href="#video">Guarda i video</a>
+        <a class="btn" href="#foto">Guarda le foto</a>
+      </div>
+      <p class="scorri">Scorri per continuare</p>
+    </div>
+  </div>
+
+  <!-- CHI SONO -->
+  <section id="chi-sono">
+    <div class="wrap">
+      <div class="about">
+        <div>
+          <p class="frase">Una frase che ti rappresenta, in una riga.</p>
+          <p>Sono un videomaker e art director. Scrivi qui in due o tre frasi cosa fai, con chi lavori e che stile ti distingue.</p>
+          <p>Aggiungi una riga sul tuo modo di lavorare: come nasce un progetto, quanto tempo serve e cosa può aspettarsi chi ti contatta.</p>
+        </div>
+        <div class="portrait">
+          <img src="immagini/ritratto.jpg" alt="Ritratto di Il tuo nome" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTO: metti le immagini nella cartella "immagini". Un clic apre la foto a schermo intero -->
+  <section id="foto">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Foto</h2>
+        <p>Clicca su una foto per ingrandirla</p>
+      </div>
+      <div class="photos">
+        <button type="button"><img src="immagini/foto-1.jpg" alt="Descrivi la foto 1" loading="lazy" onerror="this.style.display='none'"></button>
+        <button type="button"><img src="immagini/foto-2.jpg" alt="Descrivi la foto 2" loading="lazy" onerror="this.style.display='none'"></button>
+        <button type="button"><img src="immagini/foto-3.jpg" alt="Descrivi la foto 3" loading="lazy" onerror="this.style.display='none'"></button>
+        <button type="button"><img src="immagini/foto-4.jpg" alt="Descrivi la foto 4" loading="lazy" onerror="this.style.display='none'"></button>
+        <button type="button"><img src="immagini/foto-5.jpg" alt="Descrivi la foto 5" loading="lazy" onerror="this.style.display='none'"></button>
+        <button type="button"><img src="immagini/foto-6.jpg" alt="Descrivi la foto 6" loading="lazy" onerror="this.style.display='none'"></button>
+      </div>
+    </div>
+  </section>
+
+  <dialog id="viewer" aria-label="Foto ingrandita">
+    <img id="viewer-img" alt="">
+    <form method="dialog"><button>Chiudi</button></form>
+  </dialog>
+
+  <!-- VIDEO: il primo progetto compare grande. Copia un blocco <article> per aggiungerne -->
+  <section id="video">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Video</h2>
+        <p>Una selezione di lavori recenti</p>
+      </div>
+      <div class="videos">
+        <article class="video">
+          <div class="frame">
+            <!-- Sostituisci VIDEO_ID con il codice YouTube (la parte dopo v= nel link). Per Vimeo: https://player.vimeo.com/video/NUMERO_VIDEO -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Showreel" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <p class="etichetta">Ultimo lavoro</p>
+          <h3>Showreel</h3>
+          <p>I miei progetti migliori in pochi minuti.</p>
+        </article>
+        <article class="video">
+          <div class="frame">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Titolo progetto 2" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <h3>Titolo progetto 2</h3>
+          <p>Cliente o evento, anno. Il tuo ruolo.</p>
+        </article>
+        <article class="video">
+          <div class="frame">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Titolo progetto 3" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <h3>Titolo progetto 3</h3>
+          <p>Cliente o evento, anno. Il tuo ruolo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIZI -->
+  <section id="servizi">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Servizi</h2>
+      </div>
+      <ul class="services">
+        <li><strong>Riprese</strong><span>Eventi, backstage, spot e contenuti per i social.</span></li>
+        <li><strong>Montaggio</strong><span>Dal girato grezzo al video finito, con color e audio.</span></li>
+        <li><strong>Direzione creativa</strong><span>Idea, moodboard e identità visiva del progetto.</span></li>
+        <li><strong>Fotografia</strong><span>Ritratti, eventi e foto di prodotto.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti" class="contact">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="display">Lavoriamo insieme</h2>
+      </div>
+      <p class="nota">Raccontami il progetto che hai in mente: ti rispondo entro un paio di giorni.</p>
+      <a class="mail" href="mailto:tuamail@esempio.it">tuamail@esempio.it</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Menu a fondo pagina">
+      <a href="#home">Home</a>
+      <a href="#chi-sono">Chi Sono</a>
+      <a href="#foto">Foto</a>
+      <a href="#video">Video</a>
+      <a href="#servizi">Servizi</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+    <nav aria-label="Social">
+      <a href="https://www.instagram.com/tuoprofilo" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://vimeo.com/tuoprofilo" target="_blank" rel="noopener">Vimeo</a>
+      <a href="https://www.linkedin.com/in/tuoprofilo" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <span>© 2026 Il tuo nome</span>
+  </div>
+</footer>
+
+<script>
+  // Menu su telefono
+  var btn = document.getElementById('menu-btn');
+  var menu = document.getElementById('menu');
+  btn.addEventListener('click', function () {
+    var aperto = menu.classList.toggle('aperto');
+    btn.setAttribute('aria-expanded', aperto);
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { menu.classList.remove('aperto'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // Menu in alto: sfondo dopo la home e voce attiva
+  var topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', function () {
+    topbar.classList.toggle('solid', window.scrollY > 60);
+  }, { passive: true });
+  var links = document.querySelectorAll('header nav a');
+  var obs = new IntersectionObserver(function (voci) {
+    voci.forEach(function (v) {
+      if (v.isIntersecting) {
+        links.forEach(function (a) { a.classList.toggle('attivo', a.getAttribute('href') === '#' + v.target.id); });
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('#home, section').forEach(function (s) { obs.observe(s); });
+
+  // Foto a schermo intero
+  var viewer = document.getElementById('viewer');
+  var viewerImg = document.getElementById('viewer-img');
+  document.querySelectorAll('.photos button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var img = b.querySelector('img');
+      viewerImg.src = img.src;
+      viewerImg.alt = img.alt;
+      viewer.showModal();
+    });
+  });
+  viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
+
+  // Se la persona preferisce meno movimento, il video della home resta fermo
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var v = document.querySelector('.hero video');
+    v.removeAttribute('autoplay'); v.pause();
+  }
+</script>
+
+</body>
+</html>
